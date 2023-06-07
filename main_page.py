@@ -14,10 +14,58 @@ st.title('관악구 맛집 지도 🍽️')
 with st.sidebar:
     st.text_input("식당 이름 검색 🔍")
 
-tab1, tab2, tab3 = st.tabs(['모범음식점 모음', '식당 방문 이력','검증된 맛집 모음'])
+tab1, tab2, tab3 = st.tabs(['검증된 맛집 모음', '식당 방문 이력','모범음식점 모음'])
 
 
 with tab1:
+    st.subheader('검증된 맛집 리스트 ✅')
+
+    with st.expander('월수목금 기준 (10000₩)'):
+        nomalVerifiedRestaurantsdf = pd.DataFrame(columns=['식당 명','추천 메뉴', '거리'])
+        st.write(nomalVerifiedRestaurantsdf)
+
+    with st.expander('화요일 기준 (20000₩)'):
+        specialVerifiedRestaurantsdf = pd.DataFrame(columns=['식당 명','추천 메뉴', '거리'])
+        st.write(specialVerifiedRestaurantsdf)
+
+
+# with tab2:
+#     st.header('월수목금 기준 (10000₩)')
+#     st.subheader('가장 많이 방문한 식당 Top 5 👣')
+#     st.subheader('가장 많이 결제한 식당 Top 5 🤑')
+#     with st.expander('방문했던 식당 리스트 ✍️'):
+    
+#         rawVisitedPlacesdf = pd.read_excel("./visitedRestaurant.xlsx", skiprows=1)
+#         visitedPlacesdf = rawVisitedPlacesdf.drop_duplicates(['업체명'])
+#         visitedPlacesdf.insert(2, '방문 횟수', 0)
+#         for countColumnNum in range(len(visitedPlacesdf)):
+#             for nestedCountColumnNum in range(len(rawVisitedPlacesdf)):
+#                 if visitedPlacesdf['업체명'][countColumnNum] == rawVisitedPlacesdf['업체명'][nestedCountColumnNum]:
+#                     visitedPlacesdf.loc[countColumnNum, '방문 횟수'] += 1
+        
+#         st.write(visitedPlacesdf.columns)
+#         st.dataframe(visitedPlacesdf)
+    
+with tab2:
+    st.header('월수목금 기준 (10000₩)')
+    st.subheader('가장 많이 방문한 식당 Top 5 👣')
+    st.subheader('가장 많이 결제한 식당 Top 5 🤑')
+    with st.expander('방문했던 식당 리스트 ✍️'):
+    
+        rawVisitedPlacesdf = pd.read_excel("./visitedRestaurant.xlsx", skiprows=1)
+        visitedPlacesdf = rawVisitedPlacesdf.drop_duplicates(['업체명'])
+        visitedPlacesdf.insert(2, '방문 횟수', 0)
+        # for countColumnNum in range(len(visitedPlacesdf)):
+        #     for nestedCountColumnNum in range(len(rawVisitedPlacesdf)):
+        #         if visitedPlacesdf['업체명'].iloc[countColumnNum] == rawVisitedPlacesdf['업체명'].iloc[nestedCountColumnNum]:
+        #             visitedPlacesdf.loc[countColumnNum, '방문 횟수'] += 1
+        
+        st.write(visitedPlacesdf.columns)
+        st.dataframe(visitedPlacesdf)
+
+
+with tab3:
+
     st.subheader('23년도 6월 2일 기준 서울시 관악구 모범음식점 리스트')
     
     fullModelRestaurantdf = pd.read_excel("./modelRestaurant.xls")
@@ -76,50 +124,3 @@ with tab1:
            st.write("slider", slider_val, "checkbox", checkbox_val)
 
     st.write("Outside the form")
-
-# with tab2:
-#     st.header('월수목금 기준 (10000₩)')
-#     st.subheader('가장 많이 방문한 식당 Top 5 👣')
-#     st.subheader('가장 많이 결제한 식당 Top 5 🤑')
-#     with st.expander('방문했던 식당 리스트 ✍️'):
-    
-#         rawVisitedPlacesdf = pd.read_excel("./visitedRestaurant.xlsx", skiprows=1)
-#         visitedPlacesdf = rawVisitedPlacesdf.drop_duplicates(['업체명'])
-#         visitedPlacesdf.insert(2, '방문 횟수', 0)
-#         for countColumnNum in range(len(visitedPlacesdf)):
-#             for nestedCountColumnNum in range(len(rawVisitedPlacesdf)):
-#                 if visitedPlacesdf['업체명'][countColumnNum] == rawVisitedPlacesdf['업체명'][nestedCountColumnNum]:
-#                     visitedPlacesdf.loc[countColumnNum, '방문 횟수'] += 1
-        
-#         st.write(visitedPlacesdf.columns)
-#         st.dataframe(visitedPlacesdf)
-    
-with tab2:
-    st.header('월수목금 기준 (10000₩)')
-    st.subheader('가장 많이 방문한 식당 Top 5 👣')
-    st.subheader('가장 많이 결제한 식당 Top 5 🤑')
-    with st.expander('방문했던 식당 리스트 ✍️'):
-    
-        rawVisitedPlacesdf = pd.read_excel("./visitedRestaurant.xlsx", skiprows=1)
-        visitedPlacesdf = rawVisitedPlacesdf.drop_duplicates(['업체명'])
-        visitedPlacesdf.insert(2, '방문 횟수', 0)
-        # for countColumnNum in range(len(visitedPlacesdf)):
-        #     for nestedCountColumnNum in range(len(rawVisitedPlacesdf)):
-        #         if visitedPlacesdf['업체명'].iloc[countColumnNum] == rawVisitedPlacesdf['업체명'].iloc[nestedCountColumnNum]:
-        #             visitedPlacesdf.loc[countColumnNum, '방문 횟수'] += 1
-        
-        st.write(visitedPlacesdf.columns)
-        st.dataframe(visitedPlacesdf)
-
-
-with tab3:
-    st.subheader('검증된 맛집 리스트 ✅')
-
-    with st.expander('월수목금 기준 (10000₩)'):
-        nomalVerifiedRestaurantsdf = pd.DataFrame(columns=['식당 명','추천 메뉴', '거리'])
-        st.write(nomalVerifiedRestaurantsdf)
-
-    with st.expander('화요일 기준 (20000₩)'):
-        specialVerifiedRestaurantsdf = pd.DataFrame(columns=['식당 명','추천 메뉴', '거리'])
-        st.write(specialVerifiedRestaurantsdf)
-    

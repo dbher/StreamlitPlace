@@ -1,6 +1,7 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
+from streamlit_extras.switch_page_button import switch_page
 
 st.header('검증된 맛집을 추가해주세요')
 
@@ -11,6 +12,8 @@ def on_button_click(name, menu) :
     if (name or menu != '') :
         st.balloons()
         st.success('식당 추가가 완료되었습니다 🥳')
+        
+        switch_page("main_page")
     else :
         st.error('아직 작성되지 않은 부분이 있습니다. 모든 입력란을 작성해주세요 🙏')
 
