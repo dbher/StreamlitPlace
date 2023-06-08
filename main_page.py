@@ -3,14 +3,9 @@ import numpy as np
 import pandas as pd
 import openpyxl
 from sklearn.feature_extraction.text import TfidfVectorizer
-# from ./lib/modifyDataframe import 
-
-# def countDuplicates
-
 
 st.set_page_config(page_title="관악구 맛집 지도", page_icon="🍴")
 st.title('관악구 맛집 지도 🍽️')
-# st.divider()
 
 with st.sidebar:
     st.text_input("식당 이름 검색 🔍")
@@ -28,24 +23,6 @@ with tab1:
     with st.expander('화요일 기준 (20000₩)'):
         specialVerifiedRestaurantsdf = pd.DataFrame(columns=['식당 명','추천 메뉴', '거리'])
         st.write(specialVerifiedRestaurantsdf)
-
-
-# with tab2:
-#     st.header('월수목금 기준 (10000₩)')
-#     st.subheader('가장 많이 방문한 식당 Top 5 👣')
-#     st.subheader('가장 많이 결제한 식당 Top 5 🤑')
-#     with st.expander('방문했던 식당 리스트 ✍️'):
-    
-#         rawVisitedPlacesdf = pd.read_excel("./visitedRestaurant.xlsx", skiprows=1)
-#         visitedPlacesdf = rawVisitedPlacesdf.drop_duplicates(['업체명'])
-#         visitedPlacesdf.insert(2, '방문 횟수', 0)
-#         for countColumnNum in range(len(visitedPlacesdf)):
-#             for nestedCountColumnNum in range(len(rawVisitedPlacesdf)):
-#                 if visitedPlacesdf['업체명'][countColumnNum] == rawVisitedPlacesdf['업체명'][nestedCountColumnNum]:
-#                     visitedPlacesdf.loc[countColumnNum, '방문 횟수'] += 1
-        
-#         st.write(visitedPlacesdf.columns)
-#         st.dataframe(visitedPlacesdf)
     
 with tab2:
     st.header('월수목금 기준 (10000₩)')
@@ -53,9 +30,23 @@ with tab2:
     st.subheader('가장 많이 결제한 식당 Top 5 🤑')
     with st.expander('방문했던 식당 리스트 ✍️'):
     
-        rawVisitedPlacesdf = pd.read_excel("./visitedRestaurant.xlsx", skiprows=1)
+        rawVisitedPlacesdf = pd.read_excel("./visitedRestaurant.xlsx", skiprows = 1)
+        sortedVisitedPlacesdf = rawVisitedPlacesdf.sort_values(by = '업체명', ascending = True)
+        sortedVisitedPlacesdf['업체명'] = sortedVisitedPlacesdf['업체명'].str.replace(pat=' ', repl = '')
+        removedWhiteSpaceVisitedPlacesdf = sortedVisitedPlacesdf.copy()
+        removedWhiteSpaceVisitedPlacesdf.insert(2, '방문 횟수', 1)
+        nonCleanedVisitedPlacesdf = removedWhiteSpaceVisitedPlacesdf
+        st.write(nonCleanedVisitedPlacesdf)
+        nonCleanedVisitedPlacesdf = nonCleanedVisitedPlacesdf.reset_index(drop=True)
+        st.write(nonCleanedVisitedPlacesdf)
+        for count in range(len(nonCleanedVisitedPlacesdf) - 1) :
+            if nonCleanedVisitedPlacesdf['업체명'][count] in nonCleanedVisitedPlacesdf['업체명'][count + 1] :
+                nonCleanedVisitedPlacesdf['업체명'][count] = nonCleanedVisitedPlacesdf['업체명'][count + 1]
+            st.write(nonCleanedVisitedPlacesdf['업체명'][count])
+        
+        st.write(nonCleanedVisitedPlacesdf)
+
         visitedPlacesdf = rawVisitedPlacesdf.drop_duplicates(['업체명'])
-        visitedPlacesdf.insert(2, '방문 횟수', 0)
         # for countColumnNum in range(len(visitedPlacesdf)):
             # for nestedCountColumnNum in range(len(rawVisitedPlacesdf)):
         # st.write(visitedPlacesdf.drop_duplicates(['업체명'], keep='first'))
@@ -63,8 +54,6 @@ with tab2:
             # countColumnNum +=1
                 # if visitedPlacesdf['업체명'].iloc[countColumnNum] == rawVisitedPlacesdf['업체명'].iloc[nestedCountColumnNum]:
                     # visitedPlacesdf.loc[countColumnNum, '방문 횟수'] += 1
-        visitedPlacesdf = visitedPlacesdf.sort_values(by='업체명', ascending=False)
-        st.dataframe(visitedPlacesdf)
 
 
 with tab3:
