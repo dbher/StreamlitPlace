@@ -1,6 +1,7 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
+import time
 from streamlit_extras.switch_page_button import switch_page
 
 st.header('검증된 맛집을 추가해주세요')
@@ -11,18 +12,18 @@ st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', uns
 def on_button_click(name, menu) :
     if (name or menu != '') :
         st.balloons()
-        st.success('식당 추가가 완료되었습니다 🥳')
-        
+        st.success('식당 추가가 완료되었습니다 🥳 메인 홈페이지로 이동합니다')
+        time.sleep(2.5)
         switch_page("main_page")
     else :
         st.error('아직 작성되지 않은 부분이 있습니다. 모든 입력란을 작성해주세요 🙏')
 
 if costRange == '1만원 이하':
-    nomalName = st.text_input('식당 이름을 입력해주세요 ❗️', placeholder = '식당 명')
-    nomalMenu = st.text_input('어떤 메뉴가 맛있나요 ❓', placeholder = '추천 메뉴')
-    nomalDistance = st.radio(label='회사랑 어느 정도로 떨어져있나요 ❓', options=['5분 컷', '10분 컷', '15분 이상 🥲'])
+    normalName = st.text_input('식당 이름을 입력해주세요 ❗️', placeholder = '식당 명')
+    normalMenu = st.text_input('어떤 메뉴가 맛있나요 ❓', placeholder = '추천 메뉴')
+    normalDistance = st.radio(label='회사랑 어느 정도로 떨어져있나요 ❓', options=['5분 컷', '10분 컷', '15분 이상 🥲'])
     if st.button("작성 완료"):
-        on_button_click(nomalName, nomalMenu)
+        on_button_click(normalName, normalMenu)
 
 else:
     specialName = st.text_input('식당 이름을 입력해주세요 ❗️', placeholder = '식당 명')

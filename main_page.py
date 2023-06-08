@@ -2,6 +2,7 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import openpyxl
+from sklearn.feature_extraction.text import TfidfVectorizer
 # from ./lib/modifyDataframe import 
 
 # def countDuplicates
@@ -21,8 +22,8 @@ with tab1:
     st.subheader('검증된 맛집 리스트 ✅')
 
     with st.expander('월수목금 기준 (10000₩)'):
-        nomalVerifiedRestaurantsdf = pd.DataFrame(columns=['식당 명','추천 메뉴', '거리'])
-        st.write(nomalVerifiedRestaurantsdf)
+        normalVerifiedRestaurantsdf = pd.DataFrame(columns=['식당 명','추천 메뉴', '거리'])
+        st.write(normalVerifiedRestaurantsdf)
 
     with st.expander('화요일 기준 (20000₩)'):
         specialVerifiedRestaurantsdf = pd.DataFrame(columns=['식당 명','추천 메뉴', '거리'])
@@ -56,11 +57,13 @@ with tab2:
         visitedPlacesdf = rawVisitedPlacesdf.drop_duplicates(['업체명'])
         visitedPlacesdf.insert(2, '방문 횟수', 0)
         # for countColumnNum in range(len(visitedPlacesdf)):
-        #     for nestedCountColumnNum in range(len(rawVisitedPlacesdf)):
-        #         if visitedPlacesdf['업체명'].iloc[countColumnNum] == rawVisitedPlacesdf['업체명'].iloc[nestedCountColumnNum]:
-        #             visitedPlacesdf.loc[countColumnNum, '방문 횟수'] += 1
-        
-        st.write(visitedPlacesdf.columns)
+            # for nestedCountColumnNum in range(len(rawVisitedPlacesdf)):
+        # st.write(visitedPlacesdf.drop_duplicates(['업체명'], keep='first'))
+                # nestedCountColumnNum += 1
+            # countColumnNum +=1
+                # if visitedPlacesdf['업체명'].iloc[countColumnNum] == rawVisitedPlacesdf['업체명'].iloc[nestedCountColumnNum]:
+                    # visitedPlacesdf.loc[countColumnNum, '방문 횟수'] += 1
+        visitedPlacesdf = visitedPlacesdf.sort_values(by='업체명', ascending=False)
         st.dataframe(visitedPlacesdf)
 
 
