@@ -31,22 +31,28 @@ with tab2:
     with st.expander('방문했던 식당 리스트 ✍️'):
     
         rawVisitedPlacesdf = pd.read_excel("./visitedRestaurant.xlsx", skiprows = 1)
-        sortedVisitedPlacesdf = rawVisitedPlacesdf.sort_values(by = '업체명', ascending = True)
+        sortedVisitedPlacesdf = rawVisitedPlacesdf.sort_values(by = '업체명', ascending = False)
         sortedVisitedPlacesdf['업체명'] = sortedVisitedPlacesdf['업체명'].str.replace(pat=' ', repl = '')
         removedWhiteSpaceVisitedPlacesdf = sortedVisitedPlacesdf.copy()
         removedWhiteSpaceVisitedPlacesdf.insert(2, '방문 횟수', 1)
         nonCleanedVisitedPlacesdf = removedWhiteSpaceVisitedPlacesdf
-        st.write(nonCleanedVisitedPlacesdf)
         nonCleanedVisitedPlacesdf = nonCleanedVisitedPlacesdf.reset_index(drop=True)
-        st.write(nonCleanedVisitedPlacesdf)
         for count in range(len(nonCleanedVisitedPlacesdf) - 1) :
-            if nonCleanedVisitedPlacesdf['업체명'][count] in nonCleanedVisitedPlacesdf['업체명'][count + 1] :
-                nonCleanedVisitedPlacesdf['업체명'][count] = nonCleanedVisitedPlacesdf['업체명'][count + 1]
-            st.write(nonCleanedVisitedPlacesdf['업체명'][count])
-        
-        st.write(nonCleanedVisitedPlacesdf)
-
-        visitedPlacesdf = rawVisitedPlacesdf.drop_duplicates(['업체명'])
+            if nonCleanedVisitedPlacesdf['업체명'][count + 1] in nonCleanedVisitedPlacesdf['업체명'][count] :
+                nonCleanedVisitedPlacesdf['업체명'][count + 1] = nonCleanedVisitedPlacesdf['업체명'][count]
+        nonCleanedVisitedPlacesdf = nonCleanedVisitedPlacesdf.sort_values(by = '업체명',ascending = True)
+        nonCleanedVisitedPlacesdf = nonCleanedVisitedPlacesdf.reset_index(drop=True)
+        dfLen = len(nonCleanedVisitedPlacesdf) - 1
+        for count in range(dfLen) :
+            if nonCleanedVisitedPlacesdf['업체명'][count + 1] == nonCleanedVisitedPlacesdf['업체명'][count] :
+                nonCleanedVisitedPlacesdf['사용금액'][count + 1] += nonCleanedVisitedPlacesdf['사용금액'][count]
+                nonCleanedVisitedPlacesdf['방문 횟수'][count + 1] += nonCleanedVisitedPlacesdf['방문 횟수'][count]
+        nonCleanedVisitedPlacesdf = nonCleanedVisitedPlacesdf.sort_values(by = '업체명',ascending = False)
+        nonCleanedVisitedPlacesdf = nonCleanedVisitedPlacesdf.reset_index(drop=True)
+        visitedPlacesdf = nonCleanedVisitedPlacesdf.drop_duplicates(['업체명'])
+        visitedPlacesdf = visitedPlacesdf.sort_values(by = '업체명',ascending = True)
+        cleanedVisitedPlacesdf = visitedPlacesdf.reset_index(drop=True)
+        st.write(cleanedVisitedPlacesdf)
         # for countColumnNum in range(len(visitedPlacesdf)):
             # for nestedCountColumnNum in range(len(rawVisitedPlacesdf)):
         # st.write(visitedPlacesdf.drop_duplicates(['업체명'], keep='first'))
