@@ -3,6 +3,18 @@ import numpy as np
 import pandas as pd
 import time
 from streamlit_extras.switch_page_button import switch_page
+from google.oauth2 import service_account
+# from gsheetsdb import connect
+from shillelagh.backends.apsw.db import connect
+
+# Create a connection object.
+credentials = service_account.Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"],
+    scopes=[
+        "https://www.googleapis.com/auth/spreadsheets",
+    ],
+)
+conn = connect(credentials=credentials)
 
 st.header('검증된 맛집을 추가해주세요')
 st.info('행을 잘못 추가한 경우, 제일 앞의 체크박스를 누르고 del키를 누르면 해당 행이 삭제됩니다')

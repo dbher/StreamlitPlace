@@ -1,5 +1,7 @@
 import pandas as pd
 import streamlit as st
+# from gsheetsdb import connect
+from shillelagh.backends.apsw.db import connect
 
 df = pd.DataFrame(
     [
