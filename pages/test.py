@@ -8,7 +8,7 @@ def main():
     initial_df = pd.DataFrame({'컬럼1': [1, 2, 3], '컬럼2': ['A', '', ' ']})
 
     # 데이터프레임 편집기를 통해 데이터프레임 편집
-    edited_df = st.data_editor(initial_df)
+    edited_df = st.data_editor(initial_df, num_rows='dynamic')
 
     # 데이터프레임의 빈 문자열 및 공백 문자 확인하여 저장 여부 결정
     if has_empty_or_whitespace(edited_df):

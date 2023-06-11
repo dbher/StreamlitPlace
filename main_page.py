@@ -38,12 +38,12 @@ tab1, tab2, tab3 = st.tabs(['검증된 맛집 모음', '식당 방문 이력','�
 with tab1:
     st.subheader('검증된 맛집 리스트 ✅')
 
-    with st.expander('월수목금 기준 (₩10000)'):
+    with st.expander('월수목금 기준 (₩10000) 😋'):
         normalVerifiedRestaurantsdf = pd.read_csv('normalVerifiedRestaurants.csv')
         st.write(normalVerifiedRestaurantsdf)
 
 
-    with st.expander('화요일 기준 (₩20000)'):
+    with st.expander('화요일 기준 (₩20000)  👑'):
         specialVerifiedRestaurantsdf = pd.DataFrame(columns=['식당 명','추천 메뉴', '거리', '삭제'])
         st.write(specialVerifiedRestaurantsdf)
     
