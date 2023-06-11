@@ -44,7 +44,7 @@ with tab1:
 
 
     with st.expander('화요일 기준 (₩20000)  👑'):
-        specialVerifiedRestaurantsdf = pd.DataFrame(columns=['식당 명','추천 메뉴', '거리', '삭제'])
+        specialVerifiedRestaurantsdf = pd.read_csv('specialVerifiedRestaurants.csv')
         st.write(specialVerifiedRestaurantsdf)
     
 with tab2:

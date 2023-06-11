@@ -17,6 +17,20 @@ def main():
         if st.button('저장'):
             save_df_to_file(edited_df)
             st.success('데이터프레임이 저장되었습니다.')
+    
+    file_path = 'normalVerifiedRestaurants.csv'  # CSV 파일 경로
+
+    # CSV 파일 로드
+    df = pd.read_csv(file_path)
+
+    testfd = pd.read_csv(file_path)
+    # None 값 또는 공백 확인
+    if df.isnull().values.any():
+        st.write('CSV 파일에 None 값이 포함되어 있습니다.')
+    elif (df == '').values.any():
+        st.write('CSV 파일에 공백이 포함되어 있습니다.')
+    else:
+        st.write('CSV 파일에 None 값 또는 공백이 포함되어 있지 않습니다.')
 
 def has_empty_or_whitespace(df):
     # 데이터프레임의 각 셀에 대해 빈 문자열 또는 공백 문자로만 이루어진지 확인하는 로직을 구현합니다.
