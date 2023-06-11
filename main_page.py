@@ -39,16 +39,8 @@ with tab1:
     st.subheader('검증된 맛집 리스트 ✅')
 
     with st.expander('월수목금 기준 (₩10000)'):
-        # normalVerifiedRestaurantsdf = pd.DataFrame(columns=['식당 명','추천 메뉴', '거리', '삭제'])
-        # st.write(normalVerifiedRestaurantsdf)
-        normalVerifiedRestaurantsdf = pd.DataFrame(columns=['식당 명','추천 메뉴', '거리', '삭제'])
-        
-        testdf = pd.DataFrame({
-            '식당 명': ['테스트1', '테스트2', '테스트3'],
-            '추천 메뉴': ['메뉴1', '메뉴2', '메뉴3'],
-            '거리': ['5분', '10분', '15분']
-        })
-        st.dataframe(testdf)
+        normalVerifiedRestaurantsdf = pd.read_csv('normalVerifiedRestaurants.csv')
+        st.write(normalVerifiedRestaurantsdf)
 
 
     with st.expander('화요일 기준 (₩20000)'):
