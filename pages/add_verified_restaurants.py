@@ -42,7 +42,7 @@ normalFile = 'normalVerifiedRestaurants.csv'
 if check_file_exist(normalFile):
     normalVerifiedRestaurantsdf = pd.read_csv(normalFile)
 else :
-    normalVerifiedRestaurantsdf = pd.DataFrame(columns=['식당 명','추천 메뉴', '거리', '별점', '한 줄 코멘트'])
+    normalVerifiedRestaurantsdf = pd.DataFrame(columns=['식당 명','추천 메뉴', '거리(분)', '별점(1-5⭐️)', '한 줄 코멘트'])
     save_df_to_file(normalVerifiedRestaurantsdf)
     normalVerifiedRestaurantsdf = pd.read_csv(normalFile)
 
@@ -50,7 +50,7 @@ specialFile = 'specialVerifiedRestaurants.csv'
 if check_file_exist(specialFile):
     specialVerifiedRestaurantsdf = pd.read_csv(specialFile)
 else :
-    specialVerifiedRestaurantsdf = pd.DataFrame(columns=['식당 명','추천 메뉴', '거리', '별점', '한 줄 코멘트'])
+    specialVerifiedRestaurantsdf = pd.DataFrame(columns=['식당 명','추천 메뉴', '거리(분)', '별점(1-5⭐️)', '한 줄 코멘트'])
     save_df_to_file(specialVerifiedRestaurantsdf, 'special')
     specialVerifiedRestaurantsdf = pd.read_csv(specialFile)
 
@@ -64,7 +64,7 @@ with tab1:
             '식당 명': st.column_config.TextColumn(),
             '추천 메뉴': st.column_config.TextColumn(),
             '거리(분)': st.column_config.NumberColumn(
-                '거리',
+                '거리(분)',
                 help = '회사에서 도보 기준으로 얼마나 걸리나요?',
                 min_value = 0,
                 max_value = 15,
@@ -72,7 +72,7 @@ with tab1:
                 required = True
             ),
             '별점(점)': st.column_config.NumberColumn(
-                '별점',
+                '별점(1-5⭐️)',
                 help="이 식당에 별점을 매긴다면 (1-5)?",
                 min_value=1,
                 max_value=5,
@@ -95,7 +95,7 @@ with tab2:
         '식당 명': st.column_config.TextColumn(),
         '추천 메뉴': st.column_config.TextColumn(),
         '거리(분)': st.column_config.NumberColumn(
-            '거리',
+            '거리(분)',
             help = '회사에서 도보 기준으로 얼마나 걸리나요?',
             min_value = 0,
             max_value = 15,
@@ -103,7 +103,7 @@ with tab2:
             required = True
         ),
         '별점(점)': st.column_config.NumberColumn(
-            '별점',
+            '별점(1-5⭐️)',
             help="이 식당에 별점을 매긴다면 (1-5)?",
             min_value=1,
             max_value=5,
