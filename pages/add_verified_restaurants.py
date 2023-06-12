@@ -112,7 +112,8 @@ with tab2:
         ),
         '한 줄 코멘트': st.column_config.TextColumn()
         },
-        num_rows='dynamic'
+        num_rows='dynamic',
+        width = 1000
     )
 
     if st.button("작성 완료", key = 'specialButton'):

@@ -6,8 +6,8 @@ from openpyxl import Workbook
 st.set_page_config(page_title="관악구 맛집 지도", page_icon="🍴")
 st.title('관악구 맛집 지도 🍽️')
 
-with st.sidebar:
-    st.text_input("식당 이름 검색 🔍")
+# with st.sidebar:
+    # st.text_input("식당 이름 검색 🔍")
 
 rawVisitedPlacesdf = pd.read_excel("./visitedRestaurant.xlsx", skiprows = 1)
 sortedVisitedPlacesdf = rawVisitedPlacesdf.sort_values(by = '업체명', ascending = False)
