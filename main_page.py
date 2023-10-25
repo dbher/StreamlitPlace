@@ -6,9 +6,6 @@ from openpyxl import Workbook
 st.set_page_config(page_title="관악구 맛집 지도", page_icon="🍴")
 st.title('관악구 맛집 지도 🍽️')
 
-# with st.sidebar:
-    # st.text_input("식당 이름 검색 🔍")
-
 rawVisitedPlacesdf = pd.read_excel("./visitedRestaurant.xlsx", skiprows = 1)
 sortedVisitedPlacesdf = rawVisitedPlacesdf.sort_values(by = '업체명', ascending = False)
 sortedVisitedPlacesdf['업체명'] = sortedVisitedPlacesdf['업체명'].str.replace(pat=' ', repl = '')
@@ -64,7 +61,7 @@ with tab3:
     fullModelRestaurantdf = pd.read_excel("./modelRestaurant.xls")
     select_near_place = st.radio (
         '어떤 지역의 식당을 보여드릴까요?',
-        ('회사 근처', '신림', '봉천', '그냥 먼 곳')
+        ('서울대입구역 근처', '신림', '봉천', '그냥 먼 곳')
     )
     modelRestaurantdf = fullModelRestaurantdf.drop(columns=
     [
